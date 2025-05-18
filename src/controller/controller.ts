@@ -1,7 +1,9 @@
 import { WebSocket } from 'ws';
+import { Message, Types } from './Message.type';
+import { handleRegistration } from '../handlers/RegistrationHandler';
 
 const types = {
-  reg: () => {},
+  reg: handleRegistration,
 };
 
 export const handleConnection = (ws: WebSocket) => {
@@ -9,13 +11,12 @@ export const handleConnection = (ws: WebSocket) => {
 
   ws.on('message', (message: string) => {
     const parsedMessage = JSON.parse(message);
+    const receivedType: Types = parsedMessage.type;
+    types[receivedType](parsedMessage.data, ws);
     console.log(parsedMessage);
-    ws.send(JSON.stringify(`Echo: ${message}`));
   });
 
   ws.on('close', () => {
     console.log('Client disconnected');
   });
-
-  ws.send(JSON.stringify('Welcome to WebSocket server!'));
 };

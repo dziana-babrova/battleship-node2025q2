@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as http from 'http';
-import { WebSocketServer, WebSocket } from 'ws';
+import { WebSocketServer } from 'ws';
 import { handleConnection } from '../controller/controller';
 
 export const httpServer = http.createServer(function (req, res) {
