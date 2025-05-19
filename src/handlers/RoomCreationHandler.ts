@@ -5,6 +5,6 @@ import { WebSocket } from 'ws';
 import { WinnersStorageInstance } from '../models/winners/Winners.model';
 
 export const handleRoomCreation = (data: User, socket: WebSocket) => {
-  const user;
-  RoomsStorageInstance.updateRoom();
+  // const user;
+  // RoomsStorageInstance.updateRoom();
 };

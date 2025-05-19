@@ -25,13 +25,15 @@ class RoomsStorage {
     let freeRoom = this.checkFreeRooms();
     if (freeRoom && freeRoom.player1) {
       this.rooms[freeRoom.id].player2 = player.id;
+      // socket.send(Messages.update_room('', '', 0));
     } else if (freeRoom && freeRoom.player2) {
       this.rooms[freeRoom.id].player1 = player.id;
     } else {
       freeRoom = this.createRoom();
       freeRoom.player1 = player.id;
+      socket.send(Messages.update_room([]));
     }
-    socket.send(Messages.update_room(freeRoom.id, player.name, player.id));
+    // socket.send(Messages.update_room(freeRoom.id, player.name, player.id));
     console.log(freeRoom);
   }
 }

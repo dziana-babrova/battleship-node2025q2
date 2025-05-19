@@ -5,5 +5,9 @@ import { WebSocket } from 'ws';
 import { WinnersStorageInstance } from '../models/winners/Winners.model';
 
 export const handleRegistration = (data: User, socket: WebSocket) => {
-  UsersStorageInstance.createUser(data, socket);
+  const user = UsersStorageInstance.createUser(data, socket);
+  if (user) {
+    RoomsStorageInstance.updateRoom(user, socket);
+    WinnersStorageInstance.updateWinners(user, false, socket);
+  }
 };

@@ -21,10 +21,11 @@ class Winners {
 
   updateWinners(user: User, hasWon: boolean, socket: WebSocket) {
     const winnerIndex = this.checkWinner(user);
-    if (winnerIndex === -1) {
-      this.addWinner(user);
-    } else if (hasWon) {
+    if (winnerIndex !== -1 && hasWon) {
       this.winners[winnerIndex].wins++;
+    } else if (winnerIndex === -1 && hasWon) {
+      this.addWinner(user);
+      this.winners[this.winners.length - 1].wins++;
     }
     socket.send(Messages.update_winners(this.winners));
   }

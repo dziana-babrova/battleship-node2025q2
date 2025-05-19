@@ -36,23 +36,15 @@ export const Messages = {
     id: 0,
   }),
   update_room: (
-    roomId: number | string,
-    name: string,
-    index: number | string,
+    data: {
+      roomId: number | string;
+      name: string;
+      index: number;
+    }[],
   ) =>
     JSON.stringify({
       type: 'update_room',
-      data: JSON.stringify([
-        {
-          roomId,
-          roomUsers: [
-            {
-              name,
-              index,
-            },
-          ],
-        },
-      ]),
+      data: JSON.stringify(data),
       id: 0,
     }),
 };
