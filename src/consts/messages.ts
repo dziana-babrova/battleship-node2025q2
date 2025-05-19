@@ -1,4 +1,4 @@
-import { Winner } from '../models/winners/Winner.type';
+import { Winner } from '../services/winners/Winner.type';
 
 export const Messages = {
   reg: (
@@ -38,8 +38,10 @@ export const Messages = {
   update_room: (
     data: {
       roomId: number | string;
-      name: string;
-      index: number;
+      roomUsers: {
+        name: string;
+        index: number;
+      }[];
     }[],
   ) =>
     JSON.stringify({

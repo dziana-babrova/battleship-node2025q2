@@ -12,6 +12,7 @@ class UsersStorage {
         const newUser = {
           ...user,
           id: this.users.length + 1,
+          socket,
         };
         this.users.push(newUser);
         socket.send(Messages.reg(newUser.name, newUser.id, false, ''));
@@ -50,6 +51,10 @@ class UsersStorage {
 
   private isUserValid(user: Omit<User, 'id'>) {
     return user.name.length >= 5 && user.password.length >= 5;
+  }
+
+  public getUsers() {
+    return this.users;
   }
 }
 

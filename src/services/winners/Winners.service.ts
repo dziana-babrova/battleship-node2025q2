@@ -19,15 +19,15 @@ class Winners {
     return this.winners.findIndex((winner) => user.name === winner.name);
   }
 
-  updateWinners(user: User, hasWon: boolean, socket: WebSocket) {
-    const winnerIndex = this.checkWinner(user);
+  updateWinners(player: User, hasWon: boolean) {
+    const winnerIndex = this.checkWinner(player);
     if (winnerIndex !== -1 && hasWon) {
       this.winners[winnerIndex].wins++;
     } else if (winnerIndex === -1 && hasWon) {
-      this.addWinner(user);
+      this.addWinner(player);
       this.winners[this.winners.length - 1].wins++;
     }
-    socket.send(Messages.update_winners(this.winners));
+    player.socket.send(Messages.update_winners(this.winners));
   }
 }
 

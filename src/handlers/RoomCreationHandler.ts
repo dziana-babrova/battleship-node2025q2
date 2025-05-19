@@ -1,10 +1,10 @@
-import { RoomsStorageInstance } from '../models/Rooms/Rooms.model';
-import { User } from '../models/Users/User.type';
-import { UsersStorageInstance } from '../models/Users/Users.model';
+import { RoomsStorageInstance } from '../services/Rooms/Rooms.service';
+import { User } from '../services/Users/User.type';
+import { UsersStorageInstance } from '../services/Users/Users.service';
 import { WebSocket } from 'ws';
-import { WinnersStorageInstance } from '../models/winners/Winners.model';
+import { WinnersStorageInstance } from '../services/winners/Winners.service';
 
-export const handleRoomCreation = (data: User, socket: WebSocket) => {
-  // const user;
-  // RoomsStorageInstance.updateRoom();
+export const handleRoomCreation = (creator: User) => {
+  RoomsStorageInstance.createRoom(creator);
+  RoomsStorageInstance.updateRoom(creator);
 };
