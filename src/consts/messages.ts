@@ -1,3 +1,5 @@
+import { Winner } from '../models/winners/Winner.type';
+
 export const Messages = {
   reg: (
     name: string,
@@ -15,16 +17,12 @@ export const Messages = {
       }),
       id: 0,
     }),
-  update_winners: (name: string, wins: number) => ({
-    type: 'update_winners',
-    data: [
-      {
-        name,
-        wins,
-      },
-    ],
-    id: 0,
-  }),
+  update_winners: (data: Winner[]) =>
+    JSON.stringify({
+      type: 'update_winners',
+      data: JSON.stringify(data),
+      id: 0,
+    }),
   create_room: () => ({
     type: 'create_room',
     data: '',
@@ -41,19 +39,20 @@ export const Messages = {
     roomId: number | string,
     name: string,
     index: number | string,
-  ) => ({
-    type: 'update_room',
-    data: [
-      {
-        roomId,
-        roomUsers: [
-          {
-            name,
-            index,
-          },
-        ],
-      },
-    ],
-    id: 0,
-  }),
+  ) =>
+    JSON.stringify({
+      type: 'update_room',
+      data: JSON.stringify([
+        {
+          roomId,
+          roomUsers: [
+            {
+              name,
+              index,
+            },
+          ],
+        },
+      ]),
+      id: 0,
+    }),
 };

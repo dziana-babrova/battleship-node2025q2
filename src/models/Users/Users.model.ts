@@ -15,6 +15,7 @@ class UsersStorage {
         };
         this.users.push(newUser);
         socket.send(Messages.reg(newUser.name, newUser.id, false, ''));
+        return newUser;
       } else {
         socket.send(
           Messages.reg(
@@ -48,6 +49,8 @@ class UsersStorage {
   }
 
   private isUserValid(user: Omit<User, 'id'>) {
+    console.log(user);
+    console.log(user.name.split('').length);
     return user.name.length >= 5 && user.password.length >= 5;
   }
 }

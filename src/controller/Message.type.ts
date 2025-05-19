@@ -4,4 +4,4 @@ export type Message<T> = {
   id: 0;
 };
 
-export type Types = 'reg';
+export type Types = 'reg' | 'create_room';

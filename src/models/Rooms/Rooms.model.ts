@@ -1,5 +1,7 @@
+import WebSocket from 'ws';
 import { User } from '../Users/User.type';
 import { Room } from './Room.type';
+import { Messages } from '../../consts/messages';
 
 class RoomsStorage {
   rooms: Room[] = [];
@@ -19,16 +21,18 @@ class RoomsStorage {
     return this.rooms.find((room) => !room.player1 || !room.player2);
   }
 
-  updateRoom(player: User) {
-    const freeRoom = this.checkFreeRooms();
+  updateRoom(player: User, socket: WebSocket) {
+    let freeRoom = this.checkFreeRooms();
     if (freeRoom && freeRoom.player1) {
       this.rooms[freeRoom.id].player2 = player.id;
     } else if (freeRoom && freeRoom.player2) {
       this.rooms[freeRoom.id].player1 = player.id;
     } else {
-      const newRoom = this.createRoom();
-      newRoom.player1 = player.id;
+      freeRoom = this.createRoom();
+      freeRoom.player1 = player.id;
     }
+    socket.send(Messages.update_room(freeRoom.id, player.name, player.id));
+    console.log(freeRoom);
   }
 }
 

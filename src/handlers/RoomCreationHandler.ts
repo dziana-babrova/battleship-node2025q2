@@ -4,6 +4,7 @@ import { UsersStorageInstance } from '../models/Users/Users.model';
 import { WebSocket } from 'ws';
 import { WinnersStorageInstance } from '../models/winners/Winners.model';
 
-export const handleRegistration = (data: User, socket: WebSocket) => {
-  UsersStorageInstance.createUser(data, socket);
+export const handleRoomCreation = (data: User, socket: WebSocket) => {
+  const user;
+  RoomsStorageInstance.updateRoom();
 };
