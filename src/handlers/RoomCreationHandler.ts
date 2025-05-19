@@ -5,6 +5,5 @@ import { WebSocket } from 'ws';
 import { WinnersStorageInstance } from '../services/winners/Winners.service';
 
 export const handleRoomCreation = (creator: User) => {
-  RoomsStorageInstance.createRoom(creator);
   RoomsStorageInstance.updateRoom(creator);
 };

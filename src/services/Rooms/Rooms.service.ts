@@ -23,11 +23,11 @@ class RoomsStorage {
   }
 
   updateRoom(player: User) {
-    const freeRooms = this.checkFreeRooms();
-    console.log(this.rooms);
-    if (this.rooms.length === 0) {
-      player.socket.send(Messages.update_room([]));
-    } else {
+    const doesRoomExist = this.rooms.find(
+      (room) => room.player1.name === player.name,
+    );
+    if (!doesRoomExist) {
+      this.createRoom(player);
       const rooms = this.rooms.map((room) => {
         return {
           roomId: room.id,

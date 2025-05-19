@@ -1,11 +1,13 @@
 import { WebSocket } from 'ws';
 import { Message, Types } from './Message.type';
+import { User } from '../services/Users/User.type';
 import { handleRegistration } from '../handlers/RegistrationHandler';
 import { handleRoomCreation } from '../handlers/RoomCreationHandler';
-import { User } from '../services/Users/User.type';
+import { handleAddingToRoom } from '../handlers/AddingToRoomHandler';
 
 const types = {
   create_room: handleRoomCreation,
+  add_user_to_room: handleAddingToRoom,
 };
 
 export const handleConnection = (ws: WebSocket) => {
